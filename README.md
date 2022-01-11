@@ -22,3 +22,18 @@ $platformLayerId = docker inspect $id | jq ".[].RootFS.Layers[-1]"
 detect.sh --detect.docker.platform.top.layer.id="$platformLayerId"
 ```
  
+ 
+```
+imageIds[] = docker history --format '{{ .ID }}' --no-trunc gubraun/foo | awk '/sha256/ { print }'
+for id in imageIds[]
+   # If it doesn't have a RepoTags entry, it's not a platform image
+   tag = docker inspect $imageId | jq ".[].RepoTags[]"
+   if $tag == ""
+     remove from array
+# Check if multiple platform candidates
+  error?
+
+# If it doesn't have a RepoTags entry, it's not a platform image
+docker inspect $imageId | jq ".[].RepoTags[]"
+
+```
