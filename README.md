@@ -37,3 +37,5 @@ for id in imageIds[]
 docker inspect $imageId | jq ".[].RepoTags[]"
 
 ```
+
+When multiple `FROM` lines are used, the last one cleans up everything before. So everything before the last `FROM` line is irrelevant.
