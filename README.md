@@ -5,5 +5,10 @@
 ```
 docker history --format '{{ .ID }}' --no-trunc gubraun/foo
 ```
-Take the layer aboev ```<missing>```.
+
+Take the id above ```<missing>``` and save as ```$id```.
+
+```
+docker inspect $id
+```
  
