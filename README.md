@@ -5,3 +5,5 @@
 ```
 docker history --format '{{ .ID }}' --no-trunc gubraun/foo
 ```
+Take the layer aboev ```<missing>```.
+ 
