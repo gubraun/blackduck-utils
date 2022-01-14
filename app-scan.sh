@@ -51,5 +51,4 @@ done
 baseImageTop=( $(docker inspect $baseImageId | jq ".[].RootFS.Layers[-1]" | tr -d '"') )
 #echo "Base image: $baseImageName"
 #echo "Top layer: ${baseImageTop[-1]}"
-echo "--detect.docker.platform.top.layer.id=${baseImageTop[-1]}"
-
+echo "--detect.docker.image=$1 --detect.docker.platform.top.layer.id=${baseImageTop[-1]}"
