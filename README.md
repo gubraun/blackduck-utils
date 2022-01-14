@@ -36,4 +36,8 @@ Then, it inspects every image with `docker inspect` and looks for named images b
 
 It then simply walks the stack of named images. In most cases, there's just one (referring to the last FROM line in the Dockerfile). In some cases, there are multiple. This is the case when the base image itself has been built locally, rather than taking it from a registry.
 
+Once it found the base image, it uses the `RootFS` array to find the top layer, which is what Detect's property `detect.docker.platform.top.layer.id` wants.
+
+In essence, the script implements the approach described in the [Docker Inspector documentation](https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/759922726/Isolating+Application+Components).
+
 This approach works also for multi stage builds, i.e. Dockerfile with multiple FROM lines. 
