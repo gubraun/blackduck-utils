@@ -1,7 +1,10 @@
 # Black Duck Utils
 A collection of useful scripts for use with Black Duck. This is a staging area. Really useful stuff should eventually go into [offical Black Duck repo](https://github.com/blackducksoftware).
 
-## Docker image scan - application layer only
+## Table of contents
+- [Auto-exclude base image from container scan](#app-scan-sh)
+
+## app-scan.sh
 
 ```
 imageId = docker history --format '{{ .ID }}' --no-trunc gubraun/foo
