@@ -32,7 +32,7 @@ d1b55fd07600   5 years ago    /bin/sh -c #(nop) CMD ["/bin/bash"]             0B
 <missing>      5 years ago    /bin/sh -c echo '#!/bin/sh' > /usr/sbin/poli…   701B
 <missing>      5 years ago    /bin/sh -c #(nop) ADD file:3f4708cf445dc1b53…   131MB
 ```
-Then, it inspects every image with `docker inspect` and looks for named images by inspecting the `RepoTags` attribute. It assumed that only names images are used as base images.
+Then, it inspects every image with `docker inspect` and looks for named images by inspecting the `RepoTags` attribute. It assumes that only named images are used as base images.
 
 It then simply walks the stack of named images. In most cases, there's just one (referring to the last FROM line in the Dockerfile). In some cases, there are multiple. This is the case when the base image itself has been built locally, rather than taking it from a registry.
 
