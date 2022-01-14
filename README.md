@@ -19,7 +19,7 @@ Use it like this with Synopopsys Detect:
 app-scan.sh IMAGE | xargs bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --blackduck.url=<blackduck-url> --blackduck.api.token=<token> --detect.tools=DOCKER 
 ```
  
-#### How it works
+### How it works
 First, it runs `docker history` to list the images this specific image has been composed of. These are kind of the layers, but not really.
 ```
 siguser@gunnar-vbox:~/containerscan/test$ docker history gubraun/multi
