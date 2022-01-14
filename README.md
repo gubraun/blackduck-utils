@@ -32,12 +32,12 @@ d1b55fd07600   5 years ago    /bin/sh -c #(nop) CMD ["/bin/bash"]             0B
 <missing>      5 years ago    /bin/sh -c echo '#!/bin/sh' > /usr/sbin/poli…   701B
 <missing>      5 years ago    /bin/sh -c #(nop) ADD file:3f4708cf445dc1b53…   131MB
 ```
-Then, it inspects every image with `docker inspect` and looks for named images by inspecting the `RepoTags` attribute. It assumes that only named images are used as base images.
+It then inspects every image with `docker inspect` and looks for named images by inspecting the `RepoTags` attribute. It assumes that any base image must be a named image. I believe this is true, as this is how the `FROM` instruction in a Dockerfile works. If it doesn't have a name, you can't use it in `FROM`. If you can't use it in `FROM`, it can't be a base image.
 
-It then simply walks the stack of named images. In most cases, there's just one (referring to the last FROM line in the Dockerfile). In some cases, there are multiple. This is the case when the base image itself has been built locally, rather than taking it from a registry.
+It then simply walks the stack of named images. In most cases, there's just one. In some cases, there are multiple. This is the case when the base image itself has been built locally, rather than taking it from a registry. In such cases, we simply take the last one (corresponding with the last `FROM` line in the Dockerfile).
 
 Once it found the base image, it uses the `RootFS` array to find the top layer, which is what Detect's property `detect.docker.platform.top.layer.id` wants.
 
 In essence, the script implements the approach described in the [Docker Inspector documentation](https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/759922726/Isolating+Application+Components).
 
-This approach works also for multi stage builds, i.e. Dockerfile with multiple FROM lines. 
+This approach works also for multi stage builds, i.e. Dockerfile with multiple `FROM` lines, as well as alias image names (`AS`) or variables.
