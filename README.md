@@ -5,6 +5,9 @@ A collection of useful scripts for use with Black Duck. This is a staging area. 
 - [Auto-exclude base image from container scan](#app-scan-sh)
 
 ## app-scan.sh
+### Usage
+app-scan.sh <container-image> | xargs bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --blackduck.url=<blackduck-url> --blackduck.api.token=<token> --detect.tools=DOCKER 
+
 
 ```
 imageId = docker history --format '{{ .ID }}' --no-trunc gubraun/foo
