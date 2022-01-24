@@ -14,7 +14,20 @@ The app-scan.sh script will generate the following command-line option that can 
 --detect.docker.platform.top.layer.id=<sha256-hash>
 ```
 
-Use it like this with Synopopsys Detect:
+Try it first using the `--verbose` option:
+```
+gunnar@gunnar-vbox:~/containerscan/test$ ../blackduck-utils/app-scan.sh --docker.image=gubraun/foo --verbose
+
+Base image: ubuntu:15.04
+Top layer:  sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef
+
+To exclude the base layer, pass the following option to Detect:
+--detect.docker.platform.top.layer.id=sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef
+```
+
+You can also use saved images (tar files). Just use `docker.tar` instead of `docker.image` then.
+
+You can then copy & paste the `--detect.docker.platform.top.layer.id` argument to the Detect command-line, or use `xargs`:
 ```
 app-scan.sh --detect.image=foo/bar | xargs bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --blackduck.url=<blackduck-url> --blackduck.api.token=<token> --detect.tools=DOCKER --detect.image=foo/bar
 ```
