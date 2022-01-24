@@ -7,7 +7,7 @@ A collection of useful scripts for use with Black Duck. This is a staging area. 
 ## app-scan.sh
 ### Usage
 ```
-app-scan.sh [--xargs] --docker.image=IMAGE | --docker.tar=TARFILE
+app-scan.sh [--verbose] --docker.image=IMAGE | --docker.tar=TARFILE
 ```
 The app-scan.sh script will generate the following command-line option that can be appended to a detect.sh command-line:
 ```
