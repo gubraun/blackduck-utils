@@ -23,7 +23,7 @@ Top layer:  sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c
 To exclude the base layer, pass the following option to Detect:
 --detect.docker.platform.top.layer.id=sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef
 ```
-Note: you can also use saved images (tar files). Just use `docker.tar` instead of `docker.image` then.
+Note: you can also use saved images (tar files). Just use `--docker.tar` instead of `--docker.image`.
 
 You can then copy & paste the `--detect.docker.platform.top.layer.id` argument to the Detect command-line, or use `xargs`:
 ```
