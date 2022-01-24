@@ -29,10 +29,6 @@ You can then copy & paste the `--detect.docker.platform.top.layer.id` argument t
 ```
 app-scan.sh --detect.image=foo/bar | xargs bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --blackduck.url=<blackduck-url> --blackduck.api.token=<token> --detect.tools=DOCKER --detect.image=foo/bar
 ```
-or
-```
-app-scan.sh --detect.tar=bar.tar | xargs bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --blackduck.url=<blackduck-url> --blackduck.api.token=<token> --detect.tools=DOCKER --detect.tar=bar.tar
-```
  
 ### How it works
 First, it runs `docker history` to list the images this specific image has been composed of. These are kind of the layers, but not really.
