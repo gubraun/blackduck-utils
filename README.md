@@ -7,16 +7,15 @@ A collection of useful scripts for use with Black Duck. This is a staging area. 
 ## app-scan.sh
 ### Usage
 ```
-app-scan.sh IMAGE
+app-scan.sh [--xargs] --docker.image=IMAGE | --docker.tar=TARFILE
 ```
 The app-scan.sh script will generate the following command-line option that can be appended to a detect.sh command-line:
 ```
 --detect.docker.platform.top.layer.id=<sha256-hash>
 ```
-
 Try it first using the `--verbose` option:
 ```
-gunnar@gunnar-vbox:~/containerscan/test$ ../blackduck-utils/app-scan.sh --docker.image=gubraun/foo --verbose
+$ ../blackduck-utils/app-scan.sh --docker.image=gubraun/foo --verbose
 
 Base image: ubuntu:15.04
 Top layer:  sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef
@@ -24,8 +23,7 @@ Top layer:  sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c
 To exclude the base layer, pass the following option to Detect:
 --detect.docker.platform.top.layer.id=sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef
 ```
-
-You can also use saved images (tar files). Just use `docker.tar` instead of `docker.image` then.
+Note: you can also use saved images (tar files). Just use `docker.tar` instead of `docker.image` then.
 
 You can then copy & paste the `--detect.docker.platform.top.layer.id` argument to the Detect command-line, or use `xargs`:
 ```
