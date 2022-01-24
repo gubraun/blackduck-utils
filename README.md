@@ -9,14 +9,18 @@ A collection of useful scripts for use with Black Duck. This is a staging area. 
 ```
 app-scan.sh IMAGE
 ```
-The app-scan.sh script will generate the following command-line options that can be appended to a detect.sh command-line:
+The app-scan.sh script will generate the following command-line option that can be appended to a detect.sh command-line:
 ```
---detect.docker.image=<container-image> --detect.docker.platform.top.layer.id=<sha256-hash>
+--detect.docker.platform.top.layer.id=<sha256-hash>
 ```
 
 Use it like this with Synopopsys Detect:
 ```
-app-scan.sh IMAGE | xargs bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --blackduck.url=<blackduck-url> --blackduck.api.token=<token> --detect.tools=DOCKER 
+app-scan.sh --detect.image=foo/bar | xargs bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --blackduck.url=<blackduck-url> --blackduck.api.token=<token> --detect.tools=DOCKER --detect.image=foo/bar
+```
+or
+```
+app-scan.sh --detect.tar=bar.tar | xargs bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --blackduck.url=<blackduck-url> --blackduck.api.token=<token> --detect.tools=DOCKER --detect.tar=bar.tar
 ```
  
 ### How it works
