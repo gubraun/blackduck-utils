@@ -106,6 +106,14 @@ for id in ${imageIds[@]}; do
   fi
 done
 
+# If no base image found
+if [ -z "${baseImageId}" ]; then
+  if [ ! -z ${verbose} ]; then
+    echo "No base image found"
+  fi
+  exit 0
+fi
+
 # Find the top layer id of the base image (for passing to Docker Inspector)
 baseImageTop=$(docker inspect $baseImageId | jq ".[].RootFS.Layers[-1]" | tr -d '"')
 
