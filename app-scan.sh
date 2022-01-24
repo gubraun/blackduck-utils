@@ -1,7 +1,7 @@
 #/bin/bash
 
 usage() {
-  echo "Usage: app-scan.sh [--xargs] --docker.image=IMAGE | --docker.tar=TARFILE"
+  echo "Usage: app-scan.sh [--verbose] --docker.image=IMAGE | --docker.tar=TARFILE"
   exit 1
 }
 
