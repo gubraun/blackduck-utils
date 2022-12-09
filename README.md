@@ -3,3 +3,4 @@ A collection of useful scripts for use with Black Duck. This is a staging area. 
 
 ## Table of contents
 - [container-scan](./container-scan) - Auto-exclude base image from container scan
+- [reportingdb-sql](./reportingdb-sql) - Useful SQL queries for the Black Duck reporting DB.
