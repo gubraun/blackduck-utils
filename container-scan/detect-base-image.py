@@ -6,26 +6,22 @@ import json
 import dateutil.parser
 import sys
 
-
-def get_image_config_from_tar(filename):
-    tar = tarfile.open(filename)
+def get_image_config_from_tar(tarfile):
+    # Get manifest file from image
     try:
-        manifest_file = tar.getmember("manifest.json")
+        manifest_file = tarfile.getmember("manifest.json")
     except KeyError:
         print("error: no manifest.json file found in archive")
         sys.exit(1)
-    
-    manifest = json.load(tar.extractfile(manifest_file))
-
+    manifest = json.load(tarfile.extractfile(manifest_file))
     if len(manifest) > 1:
         print("error: tar contains multiple images")
         sys.exit(1)
 
+    # Parse manifest file to get config file
     config_filename = manifest[0]["Config"]
-    config_file = tar.getmember(config_filename)
-    image_config = json.load(tar.extractfile(config_file))
-    tar.close()
-
+    config_file = tarfile.getmember(config_filename)
+    image_config = json.load(tarfile.extractfile(config_file))
     return image_config
 
 def get_user_instruction_layers_from_config(image_config):
@@ -50,19 +46,24 @@ def get_rootfs_layers_from_config(image_config):
     return image_config["rootfs"]["diff_ids"]
 
 
+# Parse the command-line arguments
 parser = argparse.ArgumentParser(description='Print top layer ID of a container\'s base image.')
 parser.add_argument('tarfile', help='a container tarfile')
 args = parser.parse_args()
 
-image_config = get_image_config_from_tar(args.tarfile)
+# Open the tarfile and find the image config
+tf = tarfile.open(args.tarfile)
+image_config = get_image_config_from_tar(tf)
+tf.close()
 
-num_layers = 0
+# Count the number of user layers in image
+num_user_layers = 0
 for layer in get_user_instruction_layers_from_config(image_config):
     keys = layer.keys()
     if not "empty_layer" in keys and "created_by" in keys:
-        num_layers += 1
+        num_user_layers += 1
 
-#print(num_layers)
+# Get array of all layers and find the first layer below the user layers
 layer_ids = get_rootfs_layers_from_config(image_config)
-print(layer_ids[-num_layers-1])
+print(layer_ids[-num_user_layers-1])
 
