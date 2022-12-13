@@ -1,9 +1,9 @@
-SELECT /*m.project_version_id, m.component_id,*/ c.component_name, c.component_version_name /*, p.project_name, v.version_name, m.match_type */
+SELECT c.component_name, c.component_version_name, c.security_critical_count, c.security_high_count, c.security_medium_count, c.security_low_count
 FROM reporting.component_match_types m
 INNER JOIN reporting.component c ON m.component_id = c.id
 INNER JOIN reporting.project_version v ON m.project_version_id = v.version_id
 INNER JOIN reporting.project p ON p.project_id = v.project_id
--- only components discovered by signature scan and not (also) by packakge manager scan
+-- only components discovered by signature scan and not (also) by package manager scan
 WHERE m.match_type IN ('FILE_EXACT', 'FILE_EXACT_FILE_MATCH', 'FILE_SOME_FILES_MODIFIED', 'FILE_FILES_ADDED_DELETED_AND_MODIFIED')
     AND m.component_id NOT IN (
 	    SELECT component_id 
@@ -22,6 +22,6 @@ WHERE m.match_type IN ('FILE_EXACT', 'FILE_EXACT_FILE_MATCH', 'FILE_SOME_FILES_M
 		OR c.security_medium_count > 0
 		OR c.security_low_count > 0
 	)
-GROUP BY c.component_name, c.component_version_name  -, p.project_name, v.version_name
+GROUP BY c.component_name, c.component_version_name, c.security_critical_count, c.security_high_count, c.security_medium_count, c.security_low_count
 ORDER BY component_name ASC
 LIMIT 10000;
