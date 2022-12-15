@@ -6,8 +6,11 @@ $ ./detect-base-image.py test/ubuntu-python-curl/ubuntu-python-curl.tar
 sha256:3e549931e0240b9aac25dc79ed6a6259863879a5c9bd20755f77cac27c1ab8c8
 
 $ bash <(curl -s -L https://detect.synopsys.com/detect8.sh) \
-  --blackduck.url=<blackduck-url> \
-  --blackduck.api.token=<token> --detect.tools=DOCKER --detect.tar=test/ubuntu-python-curl/ubuntu-python-curl.tar -detect.docker.platform.top.layer.id=sha256:3e549931e0240b9aac25dc79ed6a6259863879a5c9bd20755f77cac27c1ab8c8
+    --blackduck.url=<blackduck-url> \
+    --blackduck.api.token=<token> \
+    --detect.tools=DOCKER \
+    --detect.tar=test/ubuntu-python-curl/ubuntu-python-curl.tar \
+    --detect.docker.platform.top.layer.id=sha256:3e549931e0240b9aac25dc79ed6a6259863879a5c9bd20755f77cac27c1ab8c8
 ```
 
 ## How it works
