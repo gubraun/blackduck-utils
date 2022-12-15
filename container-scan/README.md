@@ -1,5 +1,5 @@
 # Auto-exclude base image from container scan
-Analyzes a Docker container image file and computes the layer ID of the top layer of the container's base image. It is intended to be used with Synopsys Detect to exclude the base image before scanning a Docker container image.
+Analyzes a Docker container image file and computes the layer ID of the top layer of the container's base image. It is intended to be used with [Synopsys Detect](https://github.com/blackducksoftware/synopsys-detect) to exclude the base image before scanning a Docker container image.
 
 ```
 $ ./detect-base-image.py test/ubuntu-python-curl/ubuntu-python-curl.tar 
