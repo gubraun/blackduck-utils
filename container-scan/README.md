@@ -13,6 +13,18 @@ $ bash <(curl -s -L https://detect.synopsys.com/detect8.sh) \
     --detect.docker.platform.top.layer.id=sha256:3e549931e0240b9aac25dc79ed6a6259863879a5c9bd20755f77cac27c1ab8c8
 ```
 
+
+## Installation
+I recommend to use a Python Virtual Environment:
+```
+git clone https://github.com/gubraun/blackduck-utils
+cd blackduck-utils/container-scan
+python3 -m venv venv
+. ./venv/bin/activate
+pip3 install -r requirements.txt
+./detect-base-image.py
+```
+
 ## How it works
 The script inspects the Docker container's image tar file, which can be generated via `docker save` command. The script itself does not require Docker installed on your machine. In order to compute the base image top layer's ID, the script takes a different approach than suggested in the [Docker Inspector documentation](https://synopsys.atlassian.net/wiki/spaces/INTDOCS/pages/759922726/Isolating+Application+Components).
 
